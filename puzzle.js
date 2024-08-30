@@ -6,21 +6,21 @@
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: yes - app.js
 const bodyParser = require('body-parser');
 //--- Explicación:
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: yes - routes.js
 const session = require('express-session');
 //--- Explicación:
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: Yes - app.js
 const express = require('express');
-//--- Explicación:
+//--- Explicación: 
 
 // -------------------------------------------------------------------------------------
 
@@ -30,49 +30,49 @@ const bodyParser = require('body-parser');
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: yes - middleware
 const session = require('express-session');
 //--- Explicación:
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: Yes - middleware
 const dotenv = require('dotenv');
 //--- Explicación:
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: Yes - app.js
 const middlewares = require('./middlewares');
 //--- Explicación:
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: Yes - app.js
 const routes = require('./routes');
 //--- Explicación:
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: yes - routes
 dotenv.config();
 //--- Explicación:
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: Yes - app.js
 const app = express();
 //--- Explicación:
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: Yes - app.js
 const PORT = 4000;
 //--- Explicación:
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: 
+//Usado?: yes - routes
 const dotenv = require('dotenv');
 //--- Explicación:
 
@@ -96,7 +96,7 @@ routes.setup(app);
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?:yes
 const validarPalabraMiddleware = (req, res, next) => {
   const palabraCorrecta = process.env.PALABRA_SECRETA || '';
 
@@ -113,7 +113,7 @@ const validarPalabraMiddleware = (req, res, next) => {
 // -------------------------------------------------------------------------------------
 
 
-//Usado?:
+//Usado?: Yes - app.js
 const setup = (app) => {
   app.get('/', (req, res) => {
     const mensajeError = req.query.error
@@ -130,7 +130,7 @@ const setup = (app) => {
 // -------------------------------------------------------------------------------------
 
 
-//Usado?:
+//Usado?:yes
 res.send(`
   <html>
     <body>
@@ -159,7 +159,7 @@ const setupAPP = (app) => {
   }));
 };
 
-//Usado?:
+//Usado?:yes
 app.post('/profile', middlewares.validarPalabraMiddleware, (req, res) => {
   res.send(`
     <h1>Ruta del Perfil</h1>
@@ -190,7 +190,7 @@ app.use(session({
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?: Yes - app.js
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
 });
@@ -198,7 +198,7 @@ app.listen(PORT, () => {
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?:yes
 const verificarSesionMiddleware = (req, res, next) => {
   if (req.session.palabraSecreta) {
     next();
@@ -211,7 +211,7 @@ const verificarSesionMiddleware = (req, res, next) => {
 // -------------------------------------------------------------------------------------
 
 
-//Usado?:
+//Usado?: yes
 app.get('/profile', middlewares.verificarSesionMiddleware, (req, res) => {
   res.send(`
     <h1>Ruta del Perfil (Sesión activa)</h1>
@@ -225,7 +225,7 @@ app.get('/profile', middlewares.verificarSesionMiddleware, (req, res) => {
 // -------------------------------------------------------------------------------------
 
 
-//Usado?:
+//Usado?:yes
 app.post('/logout', (req, res) => {
   req.session.destroy((err) => {
     if (err) {
@@ -238,7 +238,7 @@ app.post('/logout', (req, res) => {
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?: Yes - routes.js
 module.exports = {
   setup,
 };
@@ -246,7 +246,7 @@ module.exports = {
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?: yes - middleware
 module.exports = {
   validarPalabraMiddleware,
   verificarSesionMiddleware,
