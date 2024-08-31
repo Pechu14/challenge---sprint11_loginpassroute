@@ -2,25 +2,25 @@
 
 //Usado?: 
   const middlewares = require('./middlewares');
-//--- Explicación: 
+//--- Explicación: importa los middlewares
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: yes - app.js
+//Usado?: yes
 const bodyParser = require('body-parser');
-//--- Explicación:
+//--- Explicación: importa bpdy-parser,que es un middleware de express que convierte las soliccitudes http en un objeto accesible desde req.body
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: yes - routes.js
+//Usado?: yes 
 const session = require('express-session');
-//--- Explicación:
+//--- Explicación:es un middleware para manejar sesiones de usuario.
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: Yes - app.js
+//Usado?: Yes -
 const express = require('express');
-//--- Explicación: 
+//--- Explicación: importa express
 
 // -------------------------------------------------------------------------------------
 
@@ -30,49 +30,49 @@ const bodyParser = require('body-parser');
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: yes - middleware
+//Usado?: 
 const session = require('express-session');
 //--- Explicación:
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: Yes - middleware
+//Usado?: Yes 
 const dotenv = require('dotenv');
-//--- Explicación:
+//--- Explicación: importa el archivo .env que contiene la palabra secreta
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: Yes - app.js
+//Usado?: Yes 
 const middlewares = require('./middlewares');
-//--- Explicación:
+//--- Explicación:importa los middlewares,para usarlos en las rutas
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: Yes - app.js
+//Usado?: Yes 
 const routes = require('./routes');
-//--- Explicación:
+//--- Explicación:importa las rutas
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: yes - routes
+//Usado?: yes 
 dotenv.config();
-//--- Explicación:
+//--- Explicación:configura la variable  de entorno .env
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: Yes - app.js
+//Usado?: Yes 
 const app = express();
-//--- Explicación:
+//--- Explicación:llama al metodo express en una variables con nombre app
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: Yes - app.js
+//Usado?: Yes 
 const PORT = 4000;
-//--- Explicación:
+//--- Explicación:crea una variable del puerto y le da valor
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: yes - routes
+//Usado?:
 const dotenv = require('dotenv');
 //--- Explicación:
 
@@ -84,15 +84,15 @@ dotenv.config();
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?:yes
 middlewares.setupApp(app);
-//--- Explicación: 
+//--- Explicación: configura la aplicacion express con los middlewares
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?:yes
 routes.setup(app);
-//--- Explicación: 
+//--- Explicación: configura la aplicion express con las rutas
 
 // -------------------------------------------------------------------------------------
 
@@ -107,7 +107,7 @@ const validarPalabraMiddleware = (req, res, next) => {
     res.redirect('/?error=1');
   }
 };
-//--- Explicación: 
+//--- Explicación: crea un middleware que verifica si la palabra ingresada coincide con la palabra secreta.Si lo es,guarda la palabra en la sesion,y si no,redirige con un mensaje de error
 
 
 // -------------------------------------------------------------------------------------
@@ -124,7 +124,7 @@ const setup = (app) => {
     }
   //Aquí va código dentro
 })}
-//--- Explicación: 
+//--- Explicación: crea la ruta principal "/".Muestra un mensaje de error si hay un "1" y redirige al perfil si la sesion está activa.
 
 
 // -------------------------------------------------------------------------------------
@@ -144,12 +144,12 @@ res.send(`
     </body>
   </html>
 `);
-//--- Explicación: 
+//--- Explicación: envia la respuesta con un html que contiene un formulario para ingresar la palabra y muestra un mensaje de error si es necesario.
 
 
 // -------------------------------------------------------------------------------------
 
-
+//Usado?:yes
 const setupAPP = (app) => {
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(session({
@@ -158,6 +158,9 @@ const setupAPP = (app) => {
     saveUninitialized: true,
   }));
 };
+//--- Explicación:configura la aplicacion para poder usar bodyparser y express-session
+
+// -------------------------------------------------------------------------------------
 
 //Usado?:yes
 app.post('/profile', middlewares.validarPalabraMiddleware, (req, res) => {
@@ -168,33 +171,33 @@ app.post('/profile', middlewares.validarPalabraMiddleware, (req, res) => {
     </form>
   `);
 });
-//--- Explicación: 
+//--- Explicación: crea la ruta "/profile" que muestra el perfil si la palabra es correcta.Y crea un boton de cerrar la sesion.
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?: yes
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//--- Explicación: 
+//--- Explicación: usa el middleware bodyParser  para que todas las solicitudes puedan procesar datos del cuerpo de la solicitud.
 
 // -------------------------------------------------------------------------------------
 
-//Usado?:
+//Usado?:yes
 app.use(session({
   secret: process.env.PALABRA_SECRETA || 'secretoSuperSecreto',
   resave: false,
   saveUninitialized: true,
 }));
 
-//--- Explicación: 
+//--- Explicación: configura el middleware de sesion,para que no se guarden sesiones que no sean la correcta,ni se pueda modificar.
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: Yes - app.js
+//Usado?: Yes 
 app.listen(PORT, () => {
   console.log(`Servidor en ejecución en http://localhost:${PORT}`);
 });
-//--- Explicación: 
+//--- Explicación: arranca el servidor con el puerto,y mete en consola el mensaje con la dirrecion.
 
 // -------------------------------------------------------------------------------------
 
@@ -206,7 +209,7 @@ const verificarSesionMiddleware = (req, res, next) => {
     res.redirect('/?error=2');
   }
 };
-//--- Explicación: 
+//--- Explicación: crea una middleware para verificar si la sesion esta activa,y si no lo está,redirige con un mensaje de error.
 
 // -------------------------------------------------------------------------------------
 
@@ -220,7 +223,7 @@ app.get('/profile', middlewares.verificarSesionMiddleware, (req, res) => {
     </form>
   `);
 });
-//--- Explicación: 
+//--- Explicación: crea la ruta "/profile" para mostrar la pagina del perfil.Utiliza el verificarSesionMiddleware.Incluye un boton para cerrar sesion.
 
 // -------------------------------------------------------------------------------------
 
@@ -234,25 +237,25 @@ app.post('/logout', (req, res) => {
     res.redirect('/');
   });
 });
-//--- Explicación: 
+//--- Explicación: configura la ruta "/logout" para borrar los datos de sesion y volver a la pagina de inicio.
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: Yes - routes.js
+//Usado?: Yes 
 module.exports = {
   setup,
 };
-//--- Explicación:
+//--- Explicación:exporta la funcion setup del archivo routes,js
 
 // -------------------------------------------------------------------------------------
 
-//Usado?: yes - middleware
+//Usado?: yes 
 module.exports = {
   validarPalabraMiddleware,
   verificarSesionMiddleware,
   setupAPP,
 };
-//--- Explicación:
+//--- Explicación:exporta los middlewares
 
 // -------------------------------------------------------------------------------------
 
